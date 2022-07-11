@@ -1,17 +1,46 @@
 ﻿@page "/counter"
+@inject IDialogService DialogService
 
 <PageTitle>Counter</PageTitle>
 
-<h1>Counter</h1>
 
+<h1>Counter</h1>
+@if (showCallAlert)
+{
+ <MudAlert Severity="Severity.Success" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true" CloseIconClicked="(() => CloseMe(false))">Count updated!</MudAlert>
+}
 <p role="status">Current count: @currentCount</p>
 
-<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="IncrementCount">Click Me</MudButton>
+<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Confirm">Click Me</MudButton>
+
+
 @code {
     private int currentCount = 0;
+
+     private async Task Confirm()
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", "Do you want to increse the value by 1?");
+        parameters.Add("ButtonText", "Yes");
+        parameters.Add("Color", Color.Success);
+
+        var dialogresult = DialogService.Show<DialogConfirm>("Confirm", parameters);
+        var result = await dialogresult.Result;
+        if(!result.Cancelled && bool.TryParse(result.Data.ToString(), out bool resultbool)) IncrementCount();
+    
+    }
+
 
     private void IncrementCount()
     {
         currentCount++;
+        showCallAlert = true;
+    }
+
+    private bool showCallAlert = false;
+
+    private void CloseMe(bool value)
+    {
+        showCallAlert = false;
     }
 }
