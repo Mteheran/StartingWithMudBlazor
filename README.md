@@ -8,8 +8,10 @@ A started tutorial to crear an application using Blazor WebAssembly and MudBlazo
 - Add font and style references:
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
 <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+
 - Add Script:
 <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+
 - add the service in the Program.cs class
 
 ```csharp
