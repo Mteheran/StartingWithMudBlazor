@@ -33,4 +33,6 @@ builder.Services.AddMudServices();
 ```
 
 - Navigate to Counter.razor and use the button component to test the library:
+```html
 <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="IncrementCount">Click Me</MudButton>
+```
